@@ -38,12 +38,12 @@ export default function RootLayout({
           themes={['light', 'dark']}
           disableTransitionOnChange
         >
-          <div className='bg-black'>
-          <div className="mx-auto flex min-h-screen max-w-7xl flex-col bg-background">
-            <Navbar />
-            <main className="px-4 py-2 sm:px-6 lg:px-8 lg:py-6">{children}</main>
-            <Footer />
-          </div>
+          <div className="bg-black">
+            <div className="mx-auto flex min-h-screen max-w-7xl flex-col bg-background">
+              <Navbar />
+              <main className="px-4 py-2 sm:px-6 lg:px-8 lg:py-6">{children}</main>
+              <Footer />
+            </div>
           </div>
         </ThemeProvider>
       </body>
