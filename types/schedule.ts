@@ -7,7 +7,6 @@ export interface Course {
     endTime: string
   }[]
   room: string
-  color: string
 }
 
 export interface TimeTableState {

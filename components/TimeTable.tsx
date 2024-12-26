@@ -1,98 +1,102 @@
-'use client'
-
-import { cn } from '@/lib/utils'
-import { Course } from '@/types/schedule'
-import React from 'react'
+import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface TimetableGridProps {
-  courses: Course[]
+  courses: Course[];
 }
 
 export default function TimeTable({ courses }: TimetableGridProps) {
-  const days = ['월', '화', '수', '목', '금']
-  const times = Array.from({ length: 12 }, (_, i) => `${i + 9}:00`)
+  const days = ['월', '화', '수', '목', '금'];
+  const times = Array.from({ length: 28 }, (_, i) => {
+    const hour = Math.floor(i / 2) + 9;
+    const minute = i % 2 === 0 ? '00' : '30';
+    return `${hour}:${minute}`;
+  });
 
   return (
-    <div className="overflow-auto">
-      <div className="grid min-w-[600px] grid-cols-6 gap-1 rounded-lg bg-card p-4 shadow-md">
-        <div className="py-2 text-center font-semibold"></div>
+    <div className="overflow-y-auto max-h-screen">
+      <div className="grid min-w-[500px] grid-cols-[80px_repeat(5,1fr)] gap-[0.5px] rounded-lg bg-card p-2 shadow-sm">
+        {/* Header */}
+        <div className="py-2 text-center font-bold text-sm bg-background">시간</div>
         {days.map((day) => (
-          <div key={day} className="py-2 text-center font-semibold">
+          <div key={day} className="py-2 text-center font-bold text-sm bg-background">
             {day}
           </div>
         ))}
+
+        {/* Time slots */}
         {times.map((time, index) => (
           <React.Fragment key={time}>
-            <div className="py-2 pr-2 text-right text-sm text-muted-foreground">{time}</div>
+            <div className={cn('py-2 text-right pr-2 text-sm text-muted-foreground', index % 2 === 0 ? 'bg-muted/10' : 'bg-muted/20')}>
+              {time}
+            </div>
             {days.map((day) => (
               <div
                 key={`${day}-${time}`}
-                className={cn(
-                  'relative h-16 rounded-md transition-colors',
-                  index % 2 === 0 ? 'bg-muted/30' : 'bg-background'
-                )}
+                className={cn('relative border-l border-muted', index % 2 === 0 ? 'bg-muted/10' : 'bg-muted/20')}
               >
                 {courses
-                  .flatMap((course) =>
-                    course.schedule
-                      .filter((s) => s.day === day && isTimeInRange(time, s.startTime, s.endTime))
-                      .map((schedule) => ({
-                        ...course,
-                        startTime: schedule.startTime,
-                        endTime: schedule.endTime,
-                        day: schedule.day,
-                      }))
-                  )
-                  .map((course) => (
-                    <div
-                      key={`${course.subject}-${course.day}-${course.startTime}`}
-                      className="absolute inset-0 m-0.5 overflow-hidden rounded-md p-1 text-xs shadow-sm transition-all hover:shadow-md"
-                      style={{
-                        background: `linear-gradient(135deg, ${course.color}, ${adjustColor(course.color, -20)})`,
-                        color: getContrastColor(course.color),
-                      }}
-                    >
-                      <div className="font-medium">{course.subject}</div>
-                      <div className="text-[10px] opacity-75">{course.professor}</div>
-                      <div className="text-[10px]">{course.room}</div>
-                    </div>
-                  ))}
+                  .filter((course) => course.schedule.some((s) => s.day === day))
+                  .map((course) => {
+                    const schedule = course.schedule.find((s) => s.day === day && isInTimeRange(time, s.startTime, s.endTime));
+                    if (!schedule) return null;
+
+                    const courseDuration = getCourseDuration(schedule.startTime, schedule.endTime);
+                    const startOffset = getTimeOffset(schedule.startTime);
+
+                    return (
+                      <div
+                        key={`${course.subject}-${schedule.day}-${schedule.startTime}`}
+                        className={cn(
+                          'absolute left-0 right-0 m-[2px] rounded p-[4px] text-sm shadow transition-all hover:shadow-md',
+                          'bg-primary text-white'
+                        )}
+                        style={{
+                          top: `${startOffset * 4}rem`,
+                          height: `${courseDuration * 4}rem`,
+                        }}
+                      >
+                        <div className="font-medium text-base whitespace-normal">{course.subject}</div>
+                        <div className="text-xs opacity-80 whitespace-normal">{course.professor}</div>
+                        <div className="text-xs whitespace-normal">{course.room}</div>
+                      </div>
+                    );
+                  })}
               </div>
             ))}
           </React.Fragment>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-function adjustColor(color: string, amount: number): string {
-  return (
-    '#' +
-    color
-      .replace(/^#/, '')
-      .replace(/../g, (color) =>
-        ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2)
-      )
-  )
+// 시간 차이를 구해 수업이 차지할 셀의 수를 반환
+function getCourseDuration(startTime: string, endTime: string): number {
+  const [sh, sm] = startTime.split(':').map(Number);
+  const [eh, em] = endTime.split(':').map(Number);
+
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
+
+  return (end - start) / 30; // 30분 단위로 반환
 }
 
-function getContrastColor(hexcolor: string): string {
-  const r = parseInt(hexcolor.substr(1, 2), 16)
-  const g = parseInt(hexcolor.substr(3, 2), 16)
-  const b = parseInt(hexcolor.substr(5, 2), 16)
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000
-  return yiq >= 128 ? '#000000' : '#ffffff'
+// 시작 시간을 기준으로 위치를 결정
+function getTimeOffset(startTime: string): number {
+  const [sh, sm] = startTime.split(':').map(Number);
+  return (sh - 9) * 2 + (sm / 30);
 }
 
-function isTimeInRange(time: string, startTime: string, endTime: string): boolean {
-  const [h, m] = time.split(':').map(Number)
-  const [sh, sm] = startTime.split(':').map(Number)
-  const [eh, em] = endTime.split(':').map(Number)
+// 특정 시간이 일정 범위에 속하는지 확인
+function isInTimeRange(time: string, startTime: string, endTime: string): boolean {
+  const [h, m] = time.split(':').map(Number);
+  const [sh, sm] = startTime.split(':').map(Number);
+  const [eh, em] = endTime.split(':').map(Number);
 
-  const current = h * 60 + m
-  const start = sh * 60 + sm
-  const end = eh * 60 + em
+  const current = h * 60 + m;
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
 
-  return current >= start && current < end
+  return current >= start && current < end;
 }

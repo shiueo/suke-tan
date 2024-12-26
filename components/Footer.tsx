@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Github, Twitter } from 'lucide-react'
+import { Github, Twitter, Youtube } from 'lucide-react'
 import Link from 'next/link'
 
 export function Footer() {
@@ -42,6 +42,12 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">개발자 팔로우하기</h3>
             <div className="flex space-x-4">
+            <Link href="https://www.youtube.com/@shiueo" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="icon">
+                  <Youtube className="h-5 w-5" />
+                  <span className="sr-only">Twitter</span>
+                </Button>
+              </Link>
               <Link href="https://x.com/shiueo_csh" target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost" size="icon">
                   <Twitter className="h-5 w-5" />
