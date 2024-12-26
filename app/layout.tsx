@@ -18,7 +18,7 @@ const notoSerif = Noto_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'スケたん (Suke-tan) - TimeTable Manager for KAIST Students | by shiüo (Levi Lim)',
+  title: 'Suke-tan: TimeTable Manager for KAIST Students | by shiüo (Levi Lim)',
   description:
     'Suke-tan is a user-friendly timetable manager designed specifically for KAIST undergraduates, helping you efficiently organize and manage your class schedules.',
 }

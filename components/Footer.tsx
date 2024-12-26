@@ -24,11 +24,6 @@ export function Footer() {
               </li>
               <li>
                 <a href="#" className="text-sm text-muted-foreground hover:text-primary">
-                  자주 묻는 질문
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary">
                   개인정보 처리방침
                 </a>
               </li>
@@ -40,7 +35,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold">개발자 팔로우하기</h3>
+            <h3 className="mb-4 text-lg font-semibold">개발자 소셜미디어</h3>
             <div className="flex space-x-4">
               <Link href="https://www.youtube.com/@shiueo" target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost" size="icon">

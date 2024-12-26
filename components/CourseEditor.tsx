@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils' // ShadCN의 클래스 결합 유틸리티
+import { cn } from '@/lib/utils'
 import { Course } from '@/types/schedule'
 import { useState } from 'react'
 import { Input } from './ui/input'

@@ -8,7 +8,7 @@ interface TimetableGridProps {
 
 export default function TimeTable({ courses }: TimetableGridProps) {
   const days = ['월', '화', '수', '목', '금']
-  const times = Array.from({ length: 16 }, (_, i) => {
+  const times = Array.from({ length: 14 }, (_, i) => {
     const hour = 9 + i
     return `${hour}:00`
   })
