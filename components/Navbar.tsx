@@ -7,27 +7,26 @@ import { ThemeToggle } from './theme-toggle'
 export function Navbar() {
   return (
     <nav className="border-b bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto  px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
               <span className="text-2xl font-bold text-primary">suke-tan</span>
             </Link>
             <div className="ml-10 flex hidden items-baseline space-x-4 md:block">
-              <Link href="/" className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:text-primary">
-                홈
-              </Link>
               <Link
-                href="/courses"
+                href="guide"
                 className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:text-primary"
               >
-                과목 목록
+                이용 가이드
               </Link>
               <Link
-                href="/schedule"
+                href="https://github.com/shiueo/suke-tan"
                 className="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:text-primary"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                시간표 보기
+                레포지토리
               </Link>
             </div>
           </div>
@@ -47,18 +46,18 @@ export function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem>
-                  <Link href="/" className="w-full">
-                    홈
+                  <Link href="/guide" className="w-full">
+                    이용 가이드
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/courses" className="w-full">
-                    과목 목록
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/schedule" className="w-full">
-                    시간표 보기
+                  <Link
+                    href="https://github.com/shiueo/suke-tan"
+                    className="w-full"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    래포지토리
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>

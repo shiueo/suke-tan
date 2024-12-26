@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Clock, MapPin, User } from 'lucide-react'
-import { ClassSchedule } from '../types/schedule'
+import { Course } from '../types/schedule'
 
-export default function ClassCard({ course }: { course: ClassSchedule }) {
+export default function ClassCard({ course }: { course: Course }) {
   return (
     <Card className="max-w-3xl shadow-lg transition-shadow duration-300 hover:shadow-xl">
       <CardHeader>

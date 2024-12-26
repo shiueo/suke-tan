@@ -1,4 +1,4 @@
-export interface ClassSchedule {
+export interface Course {
   subject: string
   professor: string
   schedule: {
@@ -7,10 +7,11 @@ export interface ClassSchedule {
     endTime: string
   }[]
   room: string
+  color: string
 }
 
 export interface TimeTableState {
-  schedule: ClassSchedule[]
-  addClass: (course: ClassSchedule) => void
-  removeClass: (course: ClassSchedule) => void
+  schedule: Course[]
+  addClass: (course: Course) => void
+  removeClass: (course: Course) => void
 }

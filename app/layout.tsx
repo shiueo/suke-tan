@@ -1,4 +1,5 @@
 import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/Navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Noto_Sans, Noto_Serif } from 'next/font/google'
@@ -37,9 +38,12 @@ export default function RootLayout({
           themes={['light', 'dark']}
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            {children}
+          <div className='bg-black'>
+          <div className="mx-auto flex min-h-screen max-w-7xl flex-col bg-background">
+            <Navbar />
+            <main className="px-4 py-2 sm:px-6 lg:px-8 lg:py-6">{children}</main>
             <Footer />
+          </div>
           </div>
         </ThemeProvider>
       </body>

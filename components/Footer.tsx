@@ -8,14 +8,17 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <h3 className="mb-4 text-lg font-semibold">suke-tan (スケたん)</h3>
-            <p className="text-sm text-muted-foreground">카이스트 학생들을 위한 편리한 시간표 관리 도구입니다.</p>
+            <h3 className="mb-4 text-lg font-semibold">suke-tan</h3>
+            <p className="text-sm text-muted-foreground">
+              suke-tan is a user-friendly timetable manager designed specifically for KAIST undergraduates, helping you
+              efficiently organize and manage your class schedules.
+            </p>
           </div>
           <div>
             <h3 className="mb-4 text-lg font-semibold">기타 정보</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary">
+                <a href="guide" className="text-sm text-muted-foreground hover:text-primary">
                   이용 가이드
                 </a>
               </li>
@@ -37,7 +40,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold">팔로우하기</h3>
+            <h3 className="mb-4 text-lg font-semibold">개발자 팔로우하기</h3>
             <div className="flex space-x-4">
               <Link href="https://x.com/shiueo_csh" target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost" size="icon">
@@ -54,7 +57,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t pt-6">
+        <div className="mt-6 pt-4">
           <p className="text-center text-sm text-muted-foreground">
             © {new Date().getFullYear()} shiüo. All rights reserved.
           </p>
