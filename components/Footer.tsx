@@ -54,7 +54,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t pt-4">
+        <div className="mt-8 border-t pt-6">
           <p className="text-center text-sm text-muted-foreground">
             © {new Date().getFullYear()} shiüo. All rights reserved.
           </p>
